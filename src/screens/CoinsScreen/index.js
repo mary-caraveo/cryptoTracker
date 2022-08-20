@@ -3,6 +3,7 @@ import {View, FlatList, ActivityIndicator, StyleSheet} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import Http from '../../libs/http';
 import CoinsItem from '../../components/CoinsItem.js';
+import Colors from '../../resource/colors';
 
 const CoinsScreen = () => {
   const [coins, setCoins] = useState([]);
@@ -41,7 +42,7 @@ const CoinsScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: Colors.charade,
   },
   titleText: {
     textAlign: 'center',
