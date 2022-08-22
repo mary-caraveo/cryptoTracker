@@ -10,8 +10,8 @@ const CoinsScreen = () => {
   const [loading, setLoanding] = useState(true);
   const navigation = useNavigation();
 
-  const handlePress = () => {
-    navigation.navigate('CoinDetail');
+  const handlePress = coin => {
+    navigation.navigate('CoinDetail', {coin});
   };
 
   useEffect(() => {
@@ -33,7 +33,9 @@ const CoinsScreen = () => {
       <FlatList
         data={coins}
         keyExtractor={item => item.id}
-        renderItem={({item}) => <CoinsItem item={item} />}
+        renderItem={({item}) => (
+          <CoinsItem item={item} onPress={() => handlePress(item)} />
+        )}
       />
     </View>
   );
