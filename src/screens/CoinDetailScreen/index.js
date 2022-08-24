@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react';
-import {View, Text, Image, SectionList, StyleSheet} from 'react-native';
+import {Image, SectionList, StyleSheet, Text, View} from 'react-native';
+import CoinMarketItem from '../../components/CoinMarketItem';
 import colors from '../../resource/colors';
 
 const CoinDetailScreen = ({route, navigation}) => {
@@ -8,7 +9,7 @@ const CoinDetailScreen = ({route, navigation}) => {
   const getSymbolIcon = () =>
     `https://c1.coinlore.com/img/25x25/${coin.nameid}.png`;
 
-  const getSections = coin => {
+  const getSections = () => {
     const sections = [
       {
         title: 'Market cap',
@@ -40,6 +41,7 @@ const CoinDetailScreen = ({route, navigation}) => {
         <Text style={styles.titleText}>{coin.name}</Text>
       </View>
       <SectionList
+        style={styles.section}
         sections={getSections(coin)}
         keyExtractor={item => item}
         renderItem={({item}) => (
@@ -53,6 +55,8 @@ const CoinDetailScreen = ({route, navigation}) => {
           </View>
         )}
       />
+      <Text style={styles.marketTitle}>Markets</Text>
+      <CoinMarketItem coinId={coin.id} />
     </View>
   );
 };
@@ -77,6 +81,9 @@ const styles = StyleSheet.create({
     height: 25,
     width: 25,
   },
+  section: {
+    maxHeight: 220,
+  },
   sectionHeader: {
     backgroundColor: 'rgba(0,0,0,0.2)',
     padding: 8,
@@ -93,5 +100,13 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'bold',
   },
+  marketTitle: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 16,
+    marginLeft: 16,
+  },
 });
+
 export default CoinDetailScreen;
