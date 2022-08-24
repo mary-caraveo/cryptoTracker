@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {View, FlatList, ActivityIndicator, StyleSheet} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import Http from '../../libs/http';
-import CoinsItem from '../../components/CoinsItem.js';
+import CoinsItem from '../../components/CoinsItem';
 import Colors from '../../resource/colors';
 
 const CoinsScreen = () => {
