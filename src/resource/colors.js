@@ -3,6 +3,7 @@ const colors = {
   charade: '#272c35',
   zircon: '#e0e0e0',
   white: '#fff',
+  purple: '#80558C',
 };
 
 export default colors;
