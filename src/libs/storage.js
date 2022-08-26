@@ -1,7 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const Storage = {store, get, multiGet, getAllKeys, remove};
-
 const store = async (key, value) => {
   try {
     await AsyncStorage.setItem(key, value);
@@ -51,5 +49,7 @@ const remove = async key => {
     return false;
   }
 };
+
+const Storage = {store, get, multiGet, getAllKeys, remove};
 
 export default Storage;
