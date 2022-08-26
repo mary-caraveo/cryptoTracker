@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {
+  Alert,
   Image,
   SectionList,
   StyleSheet,
@@ -11,7 +12,7 @@ import CoinMarketItem from '../../components/CoinMarketItem';
 import Storage from '../../libs/storage';
 import colors from '../../resource/colors';
 
-const CoinDetailScreen = ({route, navigation}) => {
+const CoinDetailScreen = ({route}) => {
   const {coin} = route.params;
   const [favorite, setFavorite] = useState(false);
 
@@ -38,6 +39,7 @@ const CoinDetailScreen = ({route, navigation}) => {
 
   const toogleFavorite = () => {
     if (favorite) {
+      removeFavorite();
     } else {
       addFavorite();
     }
@@ -47,14 +49,57 @@ const CoinDetailScreen = ({route, navigation}) => {
     const value = JSON.stringify(coin);
     const key = `favorite-${coin.id}`;
     const stored = await Storage.store(key, value);
+
+    console.log('stored', stored);
     if (stored) {
       setFavorite({favorite: true});
     }
   };
 
+  const removeFavorite = async () => {
+    Alert.alert('Remove favorite', 'Are you sure?', [
+      {
+        text: 'Cancel',
+        onPress: () => {},
+        style: 'cancel',
+      },
+      {
+        text: 'Remove',
+        onPress: async () => {
+          const key = `favorite-${coin.id}`;
+          const removed = await Storage.remove(key);
+          if (removed) {
+            setFavorite(false);
+          }
+        },
+        style: 'destructive',
+      },
+    ]);
+  };
+
   useEffect(() => {
-    navigation.setOptions({title: coin.symbol});
-  }, [coin.symbol, navigation]);
+    let mounted = true;
+
+    if (!coin || !mounted) {
+      return;
+    }
+
+    const getFavorite = async () => {
+      try {
+        const key = `favorite-${coin.id}`;
+        const stringfavorite = await Storage.get(key);
+        if (stringfavorite !== null) {
+          setFavorite(true);
+        }
+      } catch (err) {
+        console.log('error get favorites ', err);
+      }
+    };
+
+    getFavorite(coin);
+
+    return () => (mounted = false);
+  }, [coin]);
 
   return (
     <View style={styles.container}>
