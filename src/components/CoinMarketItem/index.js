@@ -21,7 +21,7 @@ const CoinMarketItem = ({coinId}) => {
       style={styles.list}
       data={markets}
       horizontal={true}
-      keyExtractor={item => item.id}
+      keyExtractor={(item, index) => item.name + item.time + index}
       renderItem={({item}) => (
         <View style={styles.container}>
           <Text style={styles.nameText}>{item.name}</Text>
