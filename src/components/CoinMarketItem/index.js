@@ -1,7 +1,25 @@
 import React, {useState, useEffect} from 'react';
-import {FlatList, Text, View, StyleSheet} from 'react-native';
+import {FlatList, Text, View} from 'native-base';
 import Http from '../../libs/http';
 import Colors from '../../resource/colors';
+
+const MarketItem = ({item}) => {
+  return (
+    <View
+      backgroundColor="rgba(0,0,0,0.1)"
+      borderColor={Colors.purple}
+      borderRadius="20"
+      borderWidth="2"
+      padding="16"
+      marginRight="8"
+      alignItems="center">
+      <Text color="white" fontWeight="bold" fontSize="18">
+        {item.name}
+      </Text>
+      <Text color="white">{item.price_usd}</Text>
+    </View>
+  );
+};
 
 const CoinMarketItem = ({coinId}) => {
   const [markets, setMarkets] = useState([]);
@@ -18,40 +36,14 @@ const CoinMarketItem = ({coinId}) => {
 
   return (
     <FlatList
-      style={styles.list}
+      maxH={40}
+      paddingLeft="4"
       data={markets}
       horizontal={true}
       keyExtractor={(item, index) => item.name + item.time + index}
-      renderItem={({item}) => (
-        <View style={styles.container}>
-          <Text style={styles.nameText}>{item.name}</Text>
-          <Text style={styles.priceText}>{item.price_usd}</Text>
-        </View>
-      )}
+      renderItem={({item}) => <MarketItem item={item} />}
     />
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: 'rgba(0,0,0,0.1)',
-    borderColor: Colors.zircon,
-    borderWidth: 1,
-    padding: 16,
-    marginRight: 8,
-    alignItems: 'center',
-  },
-  list: {
-    maxHeight: 80,
-    paddingLeft: 16,
-  },
-  nameText: {
-    color: 'white',
-    fontWeight: 'bold',
-  },
-  priceText: {
-    color: 'white',
-  },
-});
 
 export default CoinMarketItem;
