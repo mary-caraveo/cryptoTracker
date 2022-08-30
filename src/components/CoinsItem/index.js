@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, Image, Pressable, Platform, StyleSheet} from 'react-native';
+import {View, Text, Image, Pressable} from 'native-base';
 import Colors from '../../resource/colors';
 
 const CoinsItem = ({item, onPress}) => {
@@ -12,64 +12,42 @@ const CoinsItem = ({item, onPress}) => {
   };
 
   return (
-    <Pressable onPress={onPress} style={styles.container}>
-      <View style={styles.column}>
-        <Text style={styles.symbolText}>{item.symbol}</Text>
-        <Text style={styles.nameText}>{item.name}</Text>
-      </View>
+    <Pressable onPress={onPress} marginX={4} paddingY="2">
+      <View
+        flexDirection="row"
+        justifyContent="space-between"
+        alignItems="center"
+        borderRadius={10}
+        padding="4"
+        backgroundColor={Colors.purple}>
+        <View flexDirection="column">
+          <Text color="white" fontWeight="bold" fontSize="16" marginRight="12">
+            {item.symbol}
+          </Text>
+          <Text color="white" fontSize="14">
+            {item.name}
+          </Text>
+        </View>
 
-      <View style={styles.column}>
-        <Text style={styles.priceText}>{`$${item.price_usd}`}</Text>
-      </View>
+        <View flexDirection="column">
+          <Text color="white" fontSize="14">{`$${item.price_usd}`}</Text>
+        </View>
 
-      <View style={styles.row}>
-        <Text
-          style={styles.percentText}>{`${item.percent_change_1h}  1h`}</Text>
-        <Image style={styles.imgIcon} source={getImgArrow()} />
+        <View flexDirection="row">
+          <Text
+            color="white"
+            fontSize="12">{`${item.percent_change_1h}  1h`}</Text>
+          <Image
+            width={15}
+            height={15}
+            marginLeft={15}
+            alt="Coins"
+            source={getImgArrow()}
+          />
+        </View>
       </View>
     </Pressable>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    padding: 16,
-    borderBottomColor: Colors.zircon,
-    borderBottomWidth: 1,
-    paddingLeft: Platform.OS === 'ios' ? 0 : 16,
-    marginLeft: Platform.OS === 'ios' ? 16 : 0,
-  },
-  column: {
-    flexDirection: 'column',
-  },
-  row: {
-    flexDirection: 'row',
-  },
-  symbolText: {
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: 16,
-    marginRight: 12,
-  },
-  nameText: {
-    color: 'white',
-    fontSize: 14,
-  },
-  priceText: {
-    color: 'white',
-    fontSize: 14,
-  },
-  percentText: {
-    color: 'white',
-    fontSize: 12,
-  },
-  imgIcon: {
-    width: 15,
-    height: 15,
-    marginLeft: 15,
-  },
-});
 
 export default CoinsItem;
