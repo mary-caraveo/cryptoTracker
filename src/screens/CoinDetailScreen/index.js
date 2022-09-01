@@ -1,20 +1,15 @@
 import React, {useState, useEffect} from 'react';
-import {
-  Alert,
-  Image,
-  SectionList,
-  StyleSheet,
-  Text,
-  Pressable,
-  View,
-} from 'react-native';
+import {Alert} from 'react-native';
+import {Image, SectionList, Text, Pressable, View} from 'native-base';
 import CoinMarketItem from '../../components/CoinMarketItem';
 import Storage from '../../libs/storage';
-import colors from '../../resource/colors';
+import Colors from '../../resource/colors';
 
 const CoinDetailScreen = ({route}) => {
   const {coin} = route.params;
   const [favorite, setFavorite] = useState(false);
+  const btnFavoriteColor = favorite ? Colors.purple : Colors.carmine;
+  const btnFavoriteText = favorite ? 'Remove favorite' : 'Add favorite';
 
   const getSymbolIcon = () =>
     `https://c1.coinlore.com/img/25x25/${coin.nameid}.png`;
@@ -102,111 +97,66 @@ const CoinDetailScreen = ({route}) => {
   }, [coin]);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.subHeader}>
-        <View style={styles.row}>
+    <View flex={1} backgroundColor={Colors.charade}>
+      <View
+        backgroundColor={'rgba(0,0,0,0.1)'}
+        padding="6"
+        flexDirection="row"
+        justifyContent="space-between">
+        <View flexDirection="row" alignItems="center">
           <Image
-            style={styles.iconImage}
+            height="25"
+            width="25"
+            alt="Image coin"
             source={{uri: getSymbolIcon(coin.nameid)}}
           />
-          <Text style={styles.titleText}>{coin.name}</Text>
+          <Text
+            fontSize="18"
+            color={Colors.white}
+            fontWeight="bold"
+            marginLeft={4}>
+            {coin.name}
+          </Text>
         </View>
 
         <Pressable
           onPress={toogleFavorite}
-          style={[
-            styles.btnFavorite,
-            favorite ? styles.btnFavoriteRemove : styles.btnFavoriteAdd,
-          ]}>
-          <Text style={styles.btnFavoriteText}>
-            {favorite ? 'Remove favorite' : 'Add favorite'}
-          </Text>
+          backgroundColor={btnFavoriteColor}
+          padding="2"
+          borderRadius="8">
+          <Text color={Colors.white}>{btnFavoriteText}</Text>
         </Pressable>
       </View>
       <SectionList
-        style={styles.section}
+        maxHeight={280}
         sections={getSections(coin)}
         keyExtractor={item => item}
         renderItem={({item}) => (
-          <View style={styles.sectionItem}>
-            <Text style={styles.itemText}>{item}</Text>
+          <View paddingX="6" paddingY={3}>
+            <Text color={Colors.white} fontSize="14">
+              {item}
+            </Text>
           </View>
         )}
         renderSectionHeader={({section}) => (
-          <View style={styles.sectionHeader}>
-            <Text style={styles.sectionText}>{section.title}</Text>
+          <View backgroundColor={'rgba(0,0,0,0.2)'} paddingX="6" paddingY={3}>
+            <Text color={Colors.white} fontSize="14" fontWeight="bold">
+              {section.title}
+            </Text>
           </View>
         )}
       />
-      <Text style={styles.marketTitle}>Markets</Text>
+      <Text
+        color={Colors.white}
+        fontSize="18"
+        fontWeight="bold"
+        marginBottom="4"
+        marginLeft="6">
+        Markets
+      </Text>
       <CoinMarketItem coinId={coin.id} />
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.charade,
-  },
-  subHeader: {
-    backgroundColor: 'rgba(0,0,0,0.1)',
-    padding: 16,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  titleText: {
-    fontSize: 16,
-    color: colors.white,
-    fontWeight: 'bold',
-    marginLeft: 8,
-  },
-  iconImage: {
-    height: 25,
-    width: 25,
-  },
-  section: {
-    maxHeight: 220,
-  },
-  sectionHeader: {
-    backgroundColor: 'rgba(0,0,0,0.2)',
-    padding: 8,
-  },
-  sectionItem: {
-    padding: 8,
-  },
-  itemText: {
-    color: colors.white,
-    fontSize: 14,
-  },
-  sectionText: {
-    color: colors.white,
-    fontSize: 14,
-    fontWeight: 'bold',
-  },
-  marketTitle: {
-    color: colors.white,
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginBottom: 16,
-    marginLeft: 16,
-  },
-  btnFavoriteText: {
-    color: colors.white,
-  },
-  btnFavorite: {
-    padding: 8,
-    borderRadius: 8,
-  },
-  btnFavoriteAdd: {
-    backgroundColor: colors.purple,
-  },
-  btnFavoriteRemove: {
-    backgroundColor: colors.carmine,
-  },
-  row: {
-    flexDirection: 'row',
-  },
-});
 
 export default CoinDetailScreen;
