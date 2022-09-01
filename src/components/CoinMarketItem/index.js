@@ -10,7 +10,8 @@ const MarketItem = ({item}) => {
       borderColor={Colors.purple}
       borderRadius="20"
       borderWidth="2"
-      padding="16"
+      paddingX="10"
+      paddingY="12"
       marginRight="8"
       alignItems="center">
       <Text color="white" fontWeight="bold" fontSize="18">
