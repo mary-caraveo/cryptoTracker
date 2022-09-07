@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, FlatList, StyleSheet} from 'react-native';
+import {View, FlatList} from 'native-base';
 import {useIsFocused, useNavigation} from '@react-navigation/native';
 import FavoritesEmptyState from '../../components/FavoritesEmptyState';
 import CoinsItem from '../../components/CoinsItem';
@@ -37,7 +37,7 @@ const FavoritesScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <View flex={1} backgroundColor={Colors.charade}>
       {favorites.length === 0 && <FavoritesEmptyState />}
       {favorites.length > 0 && (
         <FlatList
@@ -50,12 +50,5 @@ const FavoritesScreen = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: Colors.charade,
-  },
-});
 
 export default FavoritesScreen;
