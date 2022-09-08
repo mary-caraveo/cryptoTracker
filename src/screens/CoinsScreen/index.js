@@ -12,10 +12,6 @@ const CoinsScreen = () => {
   const [filteredCoins, setFilteredCoins] = useState([]);
   const navigation = useNavigation();
 
-  const handlePress = coin => {
-    navigation.navigate('CoinDetail', {coin});
-  };
-
   useEffect(() => {
     const getData = async () => {
       const res = await Http.instance.get(
@@ -38,6 +34,14 @@ const CoinsScreen = () => {
     setFilteredCoins(filter);
   };
 
+  const handlePress = coin => {
+    navigation.navigate('CoinDetail', {coin});
+  };
+
+  const renderItem = ({item}) => (
+    <CoinsItem key={item.id} item={item} onPress={() => handlePress(item)} />
+  );
+
   return (
     <View flex={1} backgroundColor={Colors.charade}>
       <CoinsSearch onChange={handleSearch} />
@@ -46,10 +50,9 @@ const CoinsScreen = () => {
       ) : null}
       <FlatList
         data={filteredCoins}
+        initialNumToRender={1}
         keyExtractor={item => item.id}
-        renderItem={({item}) => (
-          <CoinsItem item={item} onPress={() => handlePress(item)} />
-        )}
+        renderItem={renderItem}
       />
     </View>
   );

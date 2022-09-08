@@ -22,6 +22,8 @@ const MarketItem = ({item}) => {
   );
 };
 
+const renderItem = ({item}) => <MarketItem item={item} />;
+
 const CoinMarketItem = ({coinId}) => {
   const [markets, setMarkets] = useState([]);
 
@@ -42,7 +44,7 @@ const CoinMarketItem = ({coinId}) => {
       data={markets}
       horizontal={true}
       keyExtractor={(item, index) => item.name + item.time + index}
-      renderItem={({item}) => <MarketItem item={item} />}
+      renderItem={renderItem}
     />
   );
 };

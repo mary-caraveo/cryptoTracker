@@ -36,16 +36,15 @@ const FavoritesScreen = () => {
     navigation.navigate('CoinDetail', {coin});
   };
 
+  const renderItem = ({item}) => (
+    <CoinsItem item={item} onPress={() => handlePress(item)} />
+  );
+
   return (
     <View flex={1} backgroundColor={Colors.charade}>
       {favorites.length === 0 && <FavoritesEmptyState />}
       {favorites.length > 0 && (
-        <FlatList
-          data={favorites}
-          renderItem={({item}) => (
-            <CoinsItem item={item} onPress={() => handlePress(item)} />
-          )}
-        />
+        <FlatList data={favorites} renderItem={renderItem} />
       )}
     </View>
   );

@@ -96,6 +96,22 @@ const CoinDetailScreen = ({route}) => {
     return () => (mounted = false);
   }, [coin]);
 
+  const renderItem = ({item}) => (
+    <View paddingX="6" paddingY={3}>
+      <Text color={Colors.white} fontSize="14">
+        {item}
+      </Text>
+    </View>
+  );
+
+  const renderSectionHeader = ({section}) => (
+    <View backgroundColor={'rgba(0,0,0,0.2)'} paddingX="6" paddingY={3}>
+      <Text color={Colors.white} fontSize="14" fontWeight="bold">
+        {section.title}
+      </Text>
+    </View>
+  );
+
   return (
     <View flex={1} backgroundColor={Colors.charade}>
       <View
@@ -131,20 +147,8 @@ const CoinDetailScreen = ({route}) => {
         maxHeight={280}
         sections={getSections(coin)}
         keyExtractor={item => item}
-        renderItem={({item}) => (
-          <View paddingX="6" paddingY={3}>
-            <Text color={Colors.white} fontSize="14">
-              {item}
-            </Text>
-          </View>
-        )}
-        renderSectionHeader={({section}) => (
-          <View backgroundColor={'rgba(0,0,0,0.2)'} paddingX="6" paddingY={3}>
-            <Text color={Colors.white} fontSize="14" fontWeight="bold">
-              {section.title}
-            </Text>
-          </View>
-        )}
+        renderItem={renderItem}
+        renderSectionHeader={renderSectionHeader}
       />
       <Text
         color={Colors.white}
