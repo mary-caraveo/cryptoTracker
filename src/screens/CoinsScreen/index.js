@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, FlatList, ActivityIndicator, StyleSheet} from 'react-native';
+import {View, FlatList, Spinner} from 'native-base';
 import {useNavigation} from '@react-navigation/native';
 import Http from '../../libs/http';
 import CoinsItem from '../../components/CoinsItem';
@@ -39,10 +39,10 @@ const CoinsScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <View flex={1} backgroundColor={Colors.charade}>
       <CoinsSearch onChange={handleSearch} />
       {loading ? (
-        <ActivityIndicator color="green" size="large" style={styles.loader} />
+        <Spinner color="emerald.500" size="lg" marginTop="60" />
       ) : null}
       <FlatList
         data={filteredCoins}
@@ -54,28 +54,5 @@ const CoinsScreen = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: Colors.charade,
-  },
-  titleText: {
-    textAlign: 'center',
-  },
-  btn: {
-    padding: 8,
-    backgroundColor: '#80558C',
-    borderRadius: 8,
-    margin: 16,
-  },
-  btnText: {
-    color: 'white',
-    textAlign: 'center',
-  },
-  loader: {
-    marginTop: 60,
-  },
-});
 
 export default CoinsScreen;
