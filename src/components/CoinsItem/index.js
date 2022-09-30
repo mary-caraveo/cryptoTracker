@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {View, Text, Image, Pressable} from 'native-base';
 import Colors from '../../resource/colors';
 
@@ -50,4 +50,6 @@ const CoinsItem = ({item, onPress}) => {
   );
 };
 
-export default CoinsItem;
+export default memo(CoinsItem, (prev, next) => {
+  return prev.item.id !== next.item.id;
+});
