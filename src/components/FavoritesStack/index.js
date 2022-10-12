@@ -15,7 +15,7 @@ const FavoritesStack = () => {
         },
         headerTintColor: Colors.white,
       }}>
-      <Stack.Screen name="Favorites 🪙" component={FavoritesScreen} />
+      <Stack.Screen name="Favorites ♥️" component={FavoritesScreen} />
     </Stack.Navigator>
   );
 };
