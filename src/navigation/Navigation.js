@@ -37,7 +37,7 @@ const Navigation = () => {
           tabBarIcon: ({size, color}) => (
             <Image
               style={{tintColor: color, width: size, height: size}}
-              source={require('../assets/star.png')}
+              source={require('../assets/favorite.png')}
             />
           ),
         }}
