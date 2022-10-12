@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {View, FlatList, Spinner} from 'native-base';
 import {useNavigation} from '@react-navigation/native';
+import {StatusBar} from 'react-native';
 import Http from '../../libs/http';
 import CoinsItem from '../../components/CoinsItem';
 import CoinsSearch from '../../components/CoinsSearch';
@@ -43,18 +44,21 @@ const CoinsScreen = () => {
   );
 
   return (
-    <View flex={1} backgroundColor={Colors.charade}>
-      <CoinsSearch onChange={handleSearch} />
-      {loading ? (
-        <Spinner color="emerald.500" size="lg" marginTop="60" />
-      ) : null}
-      <FlatList
-        data={filteredCoins}
-        initialNumToRender={1}
-        keyExtractor={item => item.id}
-        renderItem={renderItem}
-      />
-    </View>
+    <>
+      <StatusBar animated={true} barStyle={'light-content'} />
+      <View flex={1} backgroundColor={Colors.charade}>
+        <CoinsSearch onChange={handleSearch} />
+        {loading ? (
+          <Spinner color="emerald.500" size="lg" marginTop="60" />
+        ) : null}
+        <FlatList
+          data={filteredCoins}
+          initialNumToRender={1}
+          keyExtractor={item => item.id}
+          renderItem={renderItem}
+        />
+      </View>
+    </>
   );
 };
 
