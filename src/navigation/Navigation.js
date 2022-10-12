@@ -19,7 +19,7 @@ const Navigation = () => {
         },
       }}>
       <Tabs.Screen
-        name="Coins Stack"
+        name="Coins"
         component={CoinsStack}
         options={{
           tabBarIcon: ({size, color}) => (
@@ -31,7 +31,7 @@ const Navigation = () => {
         }}
       />
       <Tabs.Screen
-        name="Favorites Stack"
+        name="Favorites"
         component={FavoritesStack}
         options={{
           tabBarIcon: ({size, color}) => (

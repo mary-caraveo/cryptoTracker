@@ -16,9 +16,9 @@ const CoinsStack = () => {
         },
         headerTintColor: Colors.white,
       }}>
-      <Stack.Screen name="Coins" component={CoinsScreen} />
+      <Stack.Screen name="Coins 🪙" component={CoinsScreen} />
       <Stack.Screen
-        name="CoinDetail"
+        name="Coin Detail"
         options={{
           headerBackTitleVisible: false,
         }}

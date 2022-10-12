@@ -33,7 +33,7 @@ const FavoritesScreen = () => {
   }, [focused]);
 
   const handlePress = coin => {
-    navigation.navigate('CoinDetail', {coin});
+    navigation.navigate('Coin Detail', {coin});
   };
 
   const renderItem = ({item}) => (
