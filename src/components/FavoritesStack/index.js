@@ -13,6 +13,7 @@ const FavoritesStack = () => {
           backgroundColor: Colors.blackPearl,
           shadowColor: Colors.blackPearl,
         },
+        headerTitleAlign: 'center',
         headerTintColor: Colors.white,
       }}>
       <Stack.Screen name="Favorites ♥️" component={FavoritesScreen} />
