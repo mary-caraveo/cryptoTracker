@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Alert} from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import {Image, SectionList, Text, Pressable, View} from 'native-base';
 import CoinMarketItem from '../../components/CoinMarketItem';
 import Storage from '../../libs/storage';
@@ -8,8 +9,11 @@ import Colors from '../../resource/colors';
 const CoinDetailScreen = ({route}) => {
   const {coin} = route.params;
   const [favorite, setFavorite] = useState(false);
-  const btnFavoriteColor = favorite ? Colors.purple : Colors.carmine;
-  const btnFavoriteText = favorite ? 'Remove favorite' : 'Add favorite';
+  const btnFavoriteIcon = favorite ? (
+    <Icon name="heart" size={25} color="red" solid />
+  ) : (
+    <Icon name="heart" size={25} color="gray" solid />
+  );
 
   const getSymbolIcon = () =>
     `https://c1.coinlore.com/img/25x25/${coin.nameid}.png`;
@@ -135,13 +139,7 @@ const CoinDetailScreen = ({route}) => {
           </Text>
         </View>
 
-        <Pressable
-          onPress={toogleFavorite}
-          backgroundColor={btnFavoriteColor}
-          padding="2"
-          borderRadius="8">
-          <Text color={Colors.white}>{btnFavoriteText}</Text>
-        </Pressable>
+        <Pressable onPress={toogleFavorite}>{btnFavoriteIcon}</Pressable>
       </View>
       <SectionList
         maxHeight={280}
