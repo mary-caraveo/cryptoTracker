@@ -1,13 +1,14 @@
 import React, {memo} from 'react';
-import {View, Text, Image, Pressable} from 'native-base';
+import {View, Text, Pressable} from 'native-base';
+import Icon from 'react-native-vector-icons/Feather';
 import Colors from '../../resource/colors';
 
 const CoinsItem = ({item, onPress}) => {
-  const getImgArrow = () => {
+  const GetIconArrow = () => {
     if (item.percent_change_1h > 0) {
-      return require('../../assets/arrow_up.png');
+      return <Icon name="trending-up" size={20} color="#42855B" />;
     } else {
-      return require('../../assets/arrow_down.png');
+      return <Icon name="trending-down" size={20} color="#FF4A4A" />;
     }
   };
 
@@ -36,14 +37,8 @@ const CoinsItem = ({item, onPress}) => {
         <View flexDirection="row">
           <Text
             color="white"
-            fontSize="12">{`${item.percent_change_1h}  1h`}</Text>
-          <Image
-            width={15}
-            height={15}
-            marginLeft={15}
-            alt="Coins"
-            source={getImgArrow()}
-          />
+            fontSize="12">{`${item.percent_change_1h}  1h  `}</Text>
+          <GetIconArrow />
         </View>
       </View>
     </Pressable>
