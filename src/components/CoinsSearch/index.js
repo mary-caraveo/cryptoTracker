@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {View, Input} from 'native-base';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const CoinsSearch = ({onChange}) => {
   const [inputValue, setInputValue] = useState('');
@@ -10,7 +11,7 @@ const CoinsSearch = ({onChange}) => {
   };
 
   return (
-    <View padding={4} borderBottomWidth={1} borderBottomColor={'gray.500'}>
+    <View paddingX={4} paddingBottom={2} borderBottomColor={'gray.500'}>
       <Input
         backgroundColor={'rgba(0, 0, 0, 0.2)'}
         borderColor="muted.500"
@@ -21,6 +22,16 @@ const CoinsSearch = ({onChange}) => {
         onChangeText={handleChange}
         value={inputValue}
         placeholder="Search coin"
+        InputRightElement={
+          <Icon
+            name="md-search"
+            size={20}
+            color="gray"
+            style={{
+              marginRight: 8,
+            }}
+          />
+        }
       />
     </View>
   );
