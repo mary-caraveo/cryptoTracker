@@ -36,7 +36,7 @@ const CoinsScreen = () => {
   };
 
   const handlePress = coin => {
-    navigation.navigate('Coin Detail', {coin});
+    navigation.navigate('Coin Detail 📝', {coin});
   };
 
   const renderItem = ({item}) => (

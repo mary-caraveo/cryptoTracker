@@ -19,7 +19,7 @@ const CoinsStack = () => {
       }}>
       <Stack.Screen name="Coins 🪙" component={CoinsScreen} />
       <Stack.Screen
-        name="Coin Detail"
+        name="Coin Detail 📝"
         options={{
           headerBackTitleVisible: false,
         }}
